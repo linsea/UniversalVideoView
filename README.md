@@ -51,13 +51,16 @@ but with more Media Controller customization.
                 @Override
                 public void onScaleChange(boolean isFullscreen) {
                     this.isFullscreen = isFullscreen;
-                    if (isFullscreen) {//GONE the unconcerned views to leave room for video and controller
+                    if (isFullscreen) {
                         ViewGroup.LayoutParams layoutParams = mVideoLayout.getLayoutParams();
+                        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
                         layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
                         mVideoLayout.setLayoutParams(layoutParams);
+                        //GONE the unconcerned views to leave room for video and controller
                         mBottomLayout.setVisibility(View.GONE);
                     } else {
                         ViewGroup.LayoutParams layoutParams = mVideoLayout.getLayoutParams();
+                        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
                         layoutParams.height = this.cachedHeight;
                         mVideoLayout.setLayoutParams(layoutParams);
                         mBottomLayout.setVisibility(View.VISIBLE);
@@ -91,7 +94,7 @@ but with more Media Controller customization.
 
   * Support Android Gingerbread V2.3(API Level 9 and above).
   * UniversalVideoView does not retain its full state when going into the background.
-     You should save or restore the state and take care of the ['Activity Lifecycle'](http://developer.android.com/intl/ko/guide/components/activities.html#Lifecycle) when playing video.
+     You should save or restore the state and take care of the [Activity Lifecycle](http://developer.android.com/intl/ko/guide/components/activities.html#Lifecycle).
 
   * You may need to set the `android:configChanges="orientation|keyboardHidden|screenSize"` for your `Activity` to prevent the system from recreate the Activity while phone rotation.
 
