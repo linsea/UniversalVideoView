@@ -94,9 +94,9 @@ but with more Media Controller customization.
 
   * Support Android Gingerbread V2.3(API Level 9 and above).
   * UniversalVideoView does not retain its full state when going into the background.
-     You should save or restore the state and take care of the [Activity Lifecycle](http://developer.android.com/intl/ko/guide/components/activities.html#Lifecycle).
-
-  * You may need to set the `android:configChanges="orientation|keyboardHidden|screenSize"` for your `Activity` to prevent the system from recreate the Activity while phone rotation.
+    You should save or restore the state and take care of the [Activity Lifecycle](http://developer.android.com/intl/ko/guide/components/activities.html#Lifecycle).
+  * You may need to set the `android:configChanges="orientation|keyboardHidden|screenSize"` for your `Activity` in `AndroidManifest.xml`
+    to prevent the system from recreate the Activity while phone rotation.
 
 # Customization
 
