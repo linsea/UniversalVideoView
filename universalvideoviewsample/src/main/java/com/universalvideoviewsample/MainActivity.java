@@ -136,12 +136,26 @@ public class MainActivity extends AppCompatActivity implements UniversalVideoVie
             layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
             mVideoLayout.setLayoutParams(layoutParams);
             mBottomLayout.setVisibility(View.GONE);
+
         } else {
             ViewGroup.LayoutParams layoutParams = mVideoLayout.getLayoutParams();
             layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             layoutParams.height = this.cachedHeight;
             mVideoLayout.setLayoutParams(layoutParams);
             mBottomLayout.setVisibility(View.VISIBLE);
+        }
+
+        switchTitleBar(!isFullscreen);
+    }
+
+    private void switchTitleBar(boolean show) {
+        android.support.v7.app.ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            if (show) {
+                supportActionBar.hide();
+            } else {
+                supportActionBar.show();
+            }
         }
     }
 

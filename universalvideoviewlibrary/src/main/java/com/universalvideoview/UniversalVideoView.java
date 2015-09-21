@@ -774,7 +774,6 @@ public class UniversalVideoView extends SurfaceView
     @Override
     public void setFullscreen(boolean fullscreen) {
         // Activity需要设置为: android:configChanges="keyboardHidden|orientation"
-        //                   android:alwaysRetainTaskState="true"
         Activity activity = (Activity) mContext;
 
         if (fullscreen) {
@@ -789,7 +788,6 @@ public class UniversalVideoView extends SurfaceView
 //            }
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            switchTitleBar(false);
         } else {
 //            Activity a = (Activity)mContext;
 //            if (a.getActionBar() != null) {
@@ -803,11 +801,14 @@ public class UniversalVideoView extends SurfaceView
 
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            switchTitleBar(true);
 
+        }
+        if (videoViewCallback != null) {
+            videoViewCallback.onScaleChange(fullscreen);
         }
     }
 
+/*
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void switchTitleBar(boolean show) {
         if (mContext instanceof AppCompatActivity) {
@@ -830,10 +831,8 @@ public class UniversalVideoView extends SurfaceView
                 }
             }
         }
-        if (videoViewCallback != null) {
-            videoViewCallback.onScaleChange(!show);
-        }
     }
+*/
 
 
     public interface VideoViewCallback {
