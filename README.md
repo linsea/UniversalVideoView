@@ -14,7 +14,7 @@ but with more Media Controller customization.
 
   2. Include the `UniversalVideoView` and  `UniversalMediaController` widget in your layout. This should usually be placed
      in the same parent `ViewGroup`, which makes sense when in full screen state.
-
+```xml
             <FrameLayout
                 android:id="@+id/video_layout"
                 android:layout_width="fill_parent"
@@ -35,9 +35,10 @@ but with more Media Controller customization.
                     app:uvv_scalable="true" />
 
             </FrameLayout>
+```
 
   3. In your `onCreate` method, set the `UniversalMediaController` to the `UniversalVideoView` and implements the `UniversalVideoView.VideoViewCallback` Callback.
-
+```java
             View mBottomLayout;
             View mVideoLayout;
             UniversalVideoView mVideoView;
@@ -88,7 +89,7 @@ but with more Media Controller customization.
                 }
 
             });
-
+```
 
 ##Note
 
