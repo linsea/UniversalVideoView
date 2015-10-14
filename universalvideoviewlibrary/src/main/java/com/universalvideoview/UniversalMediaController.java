@@ -583,13 +583,14 @@ public class UniversalMediaController extends FrameLayout {
         }
 
         public void onStopTrackingTouch(SeekBar bar) {
-            if (change) {
-                mPlayer.seekTo(newPosition);
-                if (mCurrentTime != null)
-                    mCurrentTime.setText(stringForTime(newPosition));
-            }
             if (mPlayer == null) {
                 return;
+            }
+            if (change) {
+                mPlayer.seekTo(newPosition);
+                if (mCurrentTime != null) {
+                    mCurrentTime.setText(stringForTime(newPosition));
+                }
             }
             mDragging = false;
             setProgress();
