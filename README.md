@@ -108,13 +108,9 @@ but with more Media Controller customization.
  * Volume Control on `UniversalMediaController`.
  * Auto switch to full screen on landscape mode.
 
-# Developed By
-
- * Andy Ke - <dictfb@gmail.com>
-
 # License
 
-    Copyright 2015 Andy Ke
+    Copyright 2015 The UniversalVideoView author <dictfb@gmail.com>
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
