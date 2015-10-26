@@ -10,8 +10,12 @@ but with more Media Controller customization.
 
 *For a working implementation of this project see the sample app.*
 
-  1. Download the library source and refer it as a library project.
-
+  1. add library dependency to your `build.gradle` file.
+```groovy
+            dependencies {
+                compile 'com.linsea:universalvideoview:1.0.0@aar'
+            }
+```
   2. Include the `UniversalVideoView` and  `UniversalMediaController` widget in your layout. This should usually be placed
      in the same parent `ViewGroup`, which makes sense when in full screen state.
 ```xml

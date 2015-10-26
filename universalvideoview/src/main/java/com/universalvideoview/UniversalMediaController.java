@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2015 Andy Ke <dictfb@gmail.com>
+* Copyright (C) 2015 Author <dictfb#gmail.com>
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.

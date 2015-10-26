@@ -1,1 +1,1 @@
-include ':universalvideoviewlibrary', ':universalvideoviewsample'
+include ':universalvideoview', ':universalvideoviewsample'
