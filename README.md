@@ -1,5 +1,7 @@
 # Android UniversalVideoView
 
+[中文版说明请点击这里](http://my.oschina.net/u/1403288/blog/522278)
+
 UniversalVideoView is a Android widget helps playing video easier, which is similar with the Android system native `VideoView`,
 but with more Media Controller customization.
 
