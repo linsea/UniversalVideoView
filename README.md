@@ -15,7 +15,7 @@ but with more Media Controller customization.
   1. add library dependency to your `build.gradle` file.
 ```groovy
             dependencies {
-                compile 'com.linsea:universalvideoview:1.0.0@aar'
+                compile 'com.linsea:universalvideoview:1.0.2@aar'
             }
 ```
   2. Include the `UniversalVideoView` and  `UniversalMediaController` widget in your layout. This should usually be placed
