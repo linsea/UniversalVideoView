@@ -782,18 +782,9 @@ public class UniversalVideoView extends SurfaceView
                 mVideoViewLayoutWidth = params.width;//保存全屏之前的参数
                 mVideoViewLayoutHeight = params.height;
             }
-//            Activity a = (Activity)mContext;
-//            if (a.getActionBar() != null) {
-//                Log.d(TAG, "ActionBar is not null 11111");
-//            }
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else {
-//            Activity a = (Activity)mContext;
-//            if (a.getActionBar() != null) {
-//                Log.d(TAG, "ActionBar is not null 22222");
-//            }
-
             ViewGroup.LayoutParams params = getLayoutParams();
             params.width = mVideoViewLayoutWidth;//使用全屏之前的参数
             params.height = mVideoViewLayoutHeight;
@@ -802,6 +793,7 @@ public class UniversalVideoView extends SurfaceView
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+            mMediaController.toggleButtons(false);
         }
         if (videoViewCallback != null) {
             videoViewCallback.onScaleChange(fullscreen);

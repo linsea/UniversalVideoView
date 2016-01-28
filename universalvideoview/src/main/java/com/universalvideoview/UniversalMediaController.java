@@ -538,6 +538,11 @@ public class UniversalMediaController extends FrameLayout {
         }
     }
 
+    void toggleButtons(boolean isFullScreen) {
+        mIsFullScreen = isFullScreen;
+        updateScaleButton();
+        updateBackButton();
+    }
 
     void updateBackButton() {
         mBackButton.setVisibility(mIsFullScreen ? View.VISIBLE : View.INVISIBLE);

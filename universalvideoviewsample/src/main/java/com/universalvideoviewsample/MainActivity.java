@@ -152,9 +152,9 @@ public class MainActivity extends AppCompatActivity implements UniversalVideoVie
         android.support.v7.app.ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
             if (show) {
-                supportActionBar.hide();
-            } else {
                 supportActionBar.show();
+            } else {
+                supportActionBar.hide();
             }
         }
     }
