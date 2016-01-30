@@ -26,7 +26,8 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -43,7 +44,7 @@ import java.util.Map;
 
 
 public class UniversalVideoView extends SurfaceView
-        implements UniversalMediaController.MediaPlayerControl {
+        implements UniversalMediaController.MediaPlayerControl,OrientationDetector.OrientationChangeListener{
     private String TAG = "UniversalVideoView";
     // settable by the client
     private Uri mUri;
@@ -86,9 +87,11 @@ public class UniversalVideoView extends SurfaceView
     private boolean     mPreparedBeforeStart;
     private Context mContext;
     private boolean     mFitXY = false;
+    private boolean     mAutoRotation = false;
     private int  mVideoViewLayoutWidth = 0;
     private int  mVideoViewLayoutHeight = 0;
 
+    private OrientationDetector mOrientationDetector;
     private VideoViewCallback videoViewCallback;
 
     public UniversalVideoView(Context context) {
@@ -104,6 +107,7 @@ public class UniversalVideoView extends SurfaceView
         mContext = context;
         TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.UniversalVideoView,0,0);
         mFitXY = a.getBoolean(R.styleable.UniversalVideoView_uvv_fitXY, false);
+        mAutoRotation = a.getBoolean(R.styleable.UniversalVideoView_uvv_autoRotation, false);
         a.recycle();
         initVideoView();
     }
@@ -217,8 +221,29 @@ public class UniversalVideoView extends SurfaceView
         mTargetState  = STATE_IDLE;
     }
 
+    @Override
+    public void onOrientationChanged(int screenOrientation, OrientationDetector.Direction direction) {
+        if (!mAutoRotation) {
+            return;
+        }
+
+        if (direction == OrientationDetector.Direction.PORTRAIT) {
+            setFullscreen(false, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        } else if (direction == OrientationDetector.Direction.REVERSE_PORTRAIT) {
+            setFullscreen(false, ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+        } else if (direction == OrientationDetector.Direction.LANDSCAPE) {
+            setFullscreen(true, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else if (direction == OrientationDetector.Direction.REVERSE_LANDSCAPE) {
+            setFullscreen(true, ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+        }
+    }
+
     public void setFitXY(boolean fitXY) {
         mFitXY = fitXY;
+    }
+
+    public void setAutoRotation(boolean auto) {
+        mAutoRotation = auto;
     }
 
     /**
@@ -573,6 +598,7 @@ public class UniversalVideoView extends SurfaceView
         {
             mSurfaceHolder = holder;
             openVideo();
+            enableOrientationDetect();
         }
 
         public void surfaceDestroyed(SurfaceHolder holder)
@@ -581,8 +607,23 @@ public class UniversalVideoView extends SurfaceView
             mSurfaceHolder = null;
             if (mMediaController != null) mMediaController.hide();
             release(true);
+            disableOrientationDetect();
         }
     };
+
+    private void enableOrientationDetect() {
+        if (mAutoRotation && mOrientationDetector == null) {
+            mOrientationDetector = new OrientationDetector(mContext);
+            mOrientationDetector.setOrientationChangeListener(UniversalVideoView.this);
+            mOrientationDetector.enable();
+        }
+    }
+
+    private void disableOrientationDetect() {
+        if (mOrientationDetector != null) {
+            mOrientationDetector.disable();
+        }
+    }
 
     /*
      * release the media player in any state
@@ -773,7 +814,14 @@ public class UniversalVideoView extends SurfaceView
 
     @Override
     public void setFullscreen(boolean fullscreen) {
-        // Activity需要设置为: android:configChanges="keyboardHidden|orientation"
+        int screenOrientation = fullscreen ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+        setFullscreen(fullscreen, screenOrientation);
+    }
+
+    @Override
+    public void setFullscreen(boolean fullscreen, int screenOrientation) {
+        // Activity需要设置为: android:configChanges="keyboardHidden|orientation|screenSize"
         Activity activity = (Activity) mContext;
 
         if (fullscreen) {
@@ -783,7 +831,7 @@ public class UniversalVideoView extends SurfaceView
                 mVideoViewLayoutHeight = params.height;
             }
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            activity.setRequestedOrientation(screenOrientation);
         } else {
             ViewGroup.LayoutParams params = getLayoutParams();
             params.width = mVideoViewLayoutWidth;//使用全屏之前的参数
@@ -791,10 +839,9 @@ public class UniversalVideoView extends SurfaceView
             setLayoutParams(params);
 
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-            mMediaController.toggleButtons(false);
+            activity.setRequestedOrientation(screenOrientation);
         }
+        mMediaController.toggleButtons(fullscreen);
         if (videoViewCallback != null) {
             videoViewCallback.onScaleChange(fullscreen);
         }

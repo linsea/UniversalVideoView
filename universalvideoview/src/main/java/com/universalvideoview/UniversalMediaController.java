@@ -548,6 +548,9 @@ public class UniversalMediaController extends FrameLayout {
         mBackButton.setVisibility(mIsFullScreen ? View.VISIBLE : View.INVISIBLE);
     }
 
+    boolean isFullScreen() {
+        return mIsFullScreen;
+    }
 
     private void doPauseResume() {
         if (mPlayer.isPlaying()) {
@@ -709,5 +712,16 @@ public class UniversalMediaController extends FrameLayout {
         void closePlayer();//关闭播放视频,使播放器处于idle状态
 
         void setFullscreen(boolean fullscreen);
+
+        /***
+         *
+         * @param fullscreen
+         * @param screenOrientation valid only fullscreen=true.values should be one of
+         *                          ActivityInfo.SCREEN_ORIENTATION_PORTRAIT,
+         *                          ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE,
+         *                          ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT,
+         *                          ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE
+         */
+        void setFullscreen(boolean fullscreen, int screenOrientation);
     }
 }

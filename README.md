@@ -3,7 +3,7 @@
 [中文版说明请点击这里](http://my.oschina.net/u/1403288/blog/522278)
 
 UniversalVideoView is a Android widget helps playing video easier, which is similar with the Android system native `VideoView`,
-but with more Media Controller customization.
+but providing more customization feature: fitXY  or keeping aspect ratio fullscreen videoView, auto switch to fullscreen on landscape mode, customised control UI...
 
 ![Sample Screenshot 1](./screenshot/screen1.png)
 ![Sample Screenshot 2](./screenshot/screen2.png)
@@ -15,7 +15,7 @@ but with more Media Controller customization.
   1. add library dependency to your `build.gradle` file.
 ```groovy
             dependencies {
-                compile 'com.linsea:universalvideoview:1.0.2@aar'
+                compile 'com.linsea:universalvideoview:1.1.0@aar'
             }
 ```
   2. Include the `UniversalVideoView` and  `UniversalMediaController` widget in your layout. This should usually be placed
@@ -32,6 +32,7 @@ but with more Media Controller customization.
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_gravity="center"
+                    app:uvv_autoRotation="true"
                     app:uvv_fitXY="false" />
 
                 <com.universalvideoview.UniversalMediaController
@@ -106,14 +107,17 @@ but with more Media Controller customization.
     to prevent the system from recreate the Activity while phone rotation.
 
 # Customization
+##`UniversalVideoView` attribute
 
- * `uvv_fitXY` attribute for `UniversalVideoView`, Video scale to fill the VideoView's dimension or keep Aspect Ratio (default) likes Android framework VideoView.
- * `uvv_scalable` attribute for `UniversalMediaController`, show or hide the scale button. if you will not play the video in fullscreen.
+ * `uvv_fitXY`, Video scale to fill the VideoView's dimension or keep Aspect Ratio (default) likes Android framework VideoView.
+ * `uvv_autoRotation`, auto switch to landscape(fullscreen) or portrait mode according to the orientation sensor.
+ 
+##`UniversalMediaController` attribute
+ * `uvv_scalable`, show or hide the scale button. if you will not play the video in fullscreen.
 
 # TODO
  * Brightness control on `UniversalMediaController`.
  * Volume Control on `UniversalMediaController`.
- * Auto switch to full screen on landscape mode.
 
 # License
 
