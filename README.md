@@ -98,7 +98,7 @@ but providing more customization feature: fitXY  or keeping aspect ratio fullscr
             });
 ```
 
-##Note
+## Note
 
   * Support Android Gingerbread V2.3(API Level 9 and above).
   * UniversalVideoView does not retain its full state when going into the background.
@@ -107,12 +107,12 @@ but providing more customization feature: fitXY  or keeping aspect ratio fullscr
     to prevent the system from recreate the Activity while phone rotation.
 
 # Customization
-##`UniversalVideoView` attribute
+## `UniversalVideoView` attribute
 
  * `uvv_fitXY`, Video scale to fill the VideoView's dimension or keep Aspect Ratio (default) likes Android framework VideoView.
  * `uvv_autoRotation`, auto switch to landscape(fullscreen) or portrait mode according to the orientation sensor.
  
-##`UniversalMediaController` attribute
+## `UniversalMediaController` attribute
  * `uvv_scalable`, show or hide the scale button. if you will not play the video in fullscreen.
 
 # TODO
