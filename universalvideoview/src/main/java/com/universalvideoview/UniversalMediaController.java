@@ -164,9 +164,9 @@ public class UniversalMediaController extends FrameLayout {
             mProgress.setMax(1000);
         }
 
-        mEndTime = (TextView) v.findViewById(R.id.duration);
-        mCurrentTime = (TextView) v.findViewById(R.id.has_played);
-        mTitle = (TextView) v.findViewById(R.id.title);
+        mEndTime = v.findViewById(R.id.duration);
+        mCurrentTime = v.findViewById(R.id.has_played);
+        mTitle = v.findViewById(R.id.title);
         mFormatBuilder = new StringBuilder();
         mFormatter = new Formatter(mFormatBuilder, Locale.getDefault());
     }
