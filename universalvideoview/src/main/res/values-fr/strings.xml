@@ -1,0 +1,5 @@
+<resources>
+    <string name="uvv_loading">Chargement...</string>
+    <string name="uvv_return">Retour</string>
+    <string name="uvv_loading_error">Quelque chose c\'est mal passé !</string>
+</resources>

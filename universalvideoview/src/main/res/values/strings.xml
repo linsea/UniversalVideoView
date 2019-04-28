@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">UniversalVideoView Library</string>
+    <string name="app_name" translatable="false">UniversalVideoView Library</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings" translatable="false">Settings</string>
+
+    <string name="uvv_loading">Loading...</string>
+    <string name="uvv_return">Return</string>
+    <string name="uvv_loading_error">Something goes wrong!</string>
 </resources>

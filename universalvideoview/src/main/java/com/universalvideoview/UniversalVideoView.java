@@ -17,7 +17,6 @@
 
 package com.universalvideoview;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -26,8 +25,6 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -185,9 +182,8 @@ public class UniversalVideoView extends SurfaceView
                     height = width * mVideoHeight / mVideoWidth;
                 }
             }
-        } else {
-            // no size yet, just adopt the given spec sizes
-        }
+        } // else: no size yet, just adopt the given spec sizes
+
         setMeasuredDimension(width, height);
     }
 
