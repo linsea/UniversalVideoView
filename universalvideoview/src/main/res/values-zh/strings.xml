@@ -1,0 +1,5 @@
+<resources>
+    <string name="uvv_loading">加载中...</string>
+    <string name="uvv_return">返回</string>
+    <string name="uvv_loading_error">出错了!</string>
+</resources>
